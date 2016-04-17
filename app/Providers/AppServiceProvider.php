@@ -1,6 +1,7 @@
 <?php namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Validator;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -11,7 +12,10 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		//
+		Validator::extend('only_numbers_like_string', function($attribute, $value)
+		{
+			return preg_match('/^[\d]+$/u', $value);
+		});
 	}
 
 	/**
